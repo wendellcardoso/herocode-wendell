@@ -43,3 +43,14 @@ header .cb{
     margin-left: 22px;
     padding: 6px;
 }
+
+@media  (min-width: 1024px) {
+    .info > div{
+        display: flex;
+    }
+
+    header .candidato{
+        margin-right: 4px;
+    }
+    
+}
