@@ -7,8 +7,39 @@
 
 header {
   display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 17px 15px;
 }
 
 header .logo {
-  width: 30%;
+  width: 100px;
+}
+
+header .info {
+    font-family: 'PT Sans Caption', sans-serif;
+    font-size: 12px;
+    
+    display: flex;
+    align-items: center;
+    text-align: right;
+}
+
+header .candidato{
+    font-weight: bold;
+}
+
+header .tipoTeste{
+    font-weight: 400;
+}
+
+header .cb{
+    font-weight: bold;
+    font-size: 15px;
+
+    background-color: var(--background2);
+
+    margin-left: 22px;
+    padding: 6px;
 }
