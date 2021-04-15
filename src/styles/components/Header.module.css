@@ -1,0 +1,14 @@
+.a {
+  fill: #1d252c;
+}
+.b {
+  fill: #e56919;
+}
+
+header {
+  display: flex;
+}
+
+header .logo {
+  width: 30%;
+}
