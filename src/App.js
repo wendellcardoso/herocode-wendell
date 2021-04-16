@@ -3,6 +3,7 @@ import axios from "axios";
 
 import Header from "./components/Header";
 import Form from "./components/Form";
+import Result from "./components/Result";
 
 import "./styles/global.css";
 
@@ -18,20 +19,22 @@ function App() {
 
     const urlBase = "https://gateway.marvel.com/v1/public/characters";
 
-    const uri = `${urlBase}?ts=1&apikey=${publicKey}&hash=${hash}`;
+    const limit = 30;
+
+    const uri = `${urlBase}?ts=1&limit=${limit}&apikey=${publicKey}&hash=${hash}`;
 
     const fetchCharacters = async () => {
       // setLoading(true);
       // const res = await axios.get(uri);
       // setCharacters(res.data.data.results);
-      // setLoading(false);
+      // // setLoading(false);
 
       // if(localStorage.getItem("dataTeste") == null){
       //   localStorage.setItem("dataTeste", JSON.stringify(res.data.data.results));
       // }
     };
     
-    // fetchData();
+    // fetchCharacters();
 
     if(characters.length == 0){
       setCharacters(JSON.parse(localStorage.getItem("dataTeste")));
@@ -62,10 +65,11 @@ function App() {
   return (
     <div>
       <Header/>
-      <div className="content">
+      <section className="content">
         <h1>Busca de personagens</h1>
         <Form manageResultsArray={manageResultsArray} />
-      </div>
+        <Result charactersRender={charactersRender} />
+      </section>
     </div>
   );
 }

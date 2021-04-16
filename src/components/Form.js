@@ -26,9 +26,9 @@ const Form = ({manageResultsArray}) => {
                         value={inputText}
                         onChange={handleInputChange}
                     />
-                    <button type="submit">
+                    <span type="submit">
                         <img src="assets/search.svg" />
-                    </button>
+                    </span>
                 </div>
 
             </form>
