@@ -2,9 +2,9 @@ import React from "react";
 
 import styles from "../styles/components/Result.module.css";
 
-const Result = ({charactersRender}) => {
+const Result = ({currentPage , currentCharacters}) => {
     return (
-        <div className={styles.container} >
+        <div id={currentPage} className={styles.container} >
             <div className={styles.tableHead}>
                 <div className={styles.emptySpace}></div>
                 <div><p>Personagens</p></div>
@@ -14,7 +14,7 @@ const Result = ({charactersRender}) => {
             <div className={styles.tableItems}>
 
             {
-                charactersRender.map(character => (
+                currentCharacters.map(character => (
                     <div key={character.id} className={styles.tableItem}>
                         <div className={styles.thumbnailName}>
                             <img src={`${character.thumbnail.path}.${character.thumbnail.extension}`} />

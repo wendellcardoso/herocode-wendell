@@ -4,12 +4,19 @@ import axios from "axios";
 import Header from "./components/Header";
 import Form from "./components/Form";
 import Result from "./components/Result";
+import Pagination from "./components/Pagination";
 
 import "./styles/global.css";
 
 function App() {
   const [characters, setCharacters] = useState([]);
-  const [charactersRender, setCharactersRender] = useState([]);
+  const [searchedCharacters, setSearchedCharacters] = useState([]);
+  const [currentCharacters, setCurrentCharacters] = useState([]);
+
+  /*PAGINACAO*/
+  const [loading, setLoading] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [charactersPerPage] = useState(10);
 
   useEffect(() => {
 
@@ -38,13 +45,21 @@ function App() {
 
     if(characters.length == 0){
       setCharacters(JSON.parse(localStorage.getItem("dataTeste")));
-      setCharactersRender(JSON.parse(localStorage.getItem("dataTeste")));
+      setSearchedCharacters(JSON.parse(localStorage.getItem("dataTeste")));
     };
   }, []);
 
+  
+
+  const paginate = pageNumber => setCurrentPage(pageNumber);
+
   useEffect(() => {
-      console.log(charactersRender);
-  }, [charactersRender]);
+      // console.log(searchedCharacters);
+      const indexOfLastCharacter = currentPage * charactersPerPage;
+      const indexOfFirstCharacter = indexOfLastCharacter - charactersPerPage;
+      const x = searchedCharacters.slice(indexOfFirstCharacter, indexOfLastCharacter);
+      setCurrentCharacters(x);
+  }, [searchedCharacters, currentPage]);
   
   // console.log(characters);
 
@@ -53,9 +68,9 @@ function App() {
   const manageResultsArray = (inputText) => {
 
     if(inputText == ""){
-      setCharactersRender(characters);
+      setSearchedCharacters(characters);
     }else{
-      setCharactersRender(characters.filter(character => 
+      setSearchedCharacters(characters.filter(character => 
         character.name
           .toLowerCase()
           .includes(inputText.toLowerCase()))
@@ -68,8 +83,14 @@ function App() {
       <section className="content">
         <h1>Busca de personagens</h1>
         <Form manageResultsArray={manageResultsArray} />
-        <Result charactersRender={charactersRender} />
+        <Result currentPage={currentPage} currentCharacters={currentCharacters} />
       </section>
+      <Pagination
+        charactersPerPage={charactersPerPage}
+        totalCharacter={searchedCharacters.length}
+        paginate={paginate}
+        currentPage={currentPage}
+      />
     </div>
   );
 }
