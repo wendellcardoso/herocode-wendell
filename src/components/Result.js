@@ -22,15 +22,16 @@ const Result = ({currentPage , currentCharacters}) => {
                         </div>
                         <div className={styles.responsive}>
                         {
-                            character.series.items.slice(0, 3).map(serie => (
-                                <p>{serie.name}</p>
+
+                            character.series.items.slice(0, 3).map((serie, index) => (
+                                <p key={index}>{serie.name}</p>
                             ))
                         }
                         </div>
                         <div className={styles.responsive}>
                         {
-                            character.events.items.slice(0, 3).map(event => (
-                                <p>{event.name}</p>
+                            character.events.items.slice(0, 3).map((event, index) => (
+                                <p key={index}>{event.name}</p>
                             ))
                         }
                         </div>

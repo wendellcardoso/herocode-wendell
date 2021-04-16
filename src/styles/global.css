@@ -5,7 +5,8 @@
     --shadow: #00000033;
     --background2: #F5F5F5;
     --text: #555555;
-    --blue: #167abc;
+    --blue-dark: #167abc;
+    --blue: #4b9ed4;
 }
 
 * {
@@ -16,6 +17,10 @@
     padding: 0;
     box-sizing: border-box;
 
+}
+
+html {
+    scroll-behavior: smooth;
 }
 /* 
 font-family: 'PT Sans Caption', sans-serif;

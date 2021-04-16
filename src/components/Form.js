@@ -10,14 +10,14 @@ const Form = ({manageResultsArray}) => {
         const {value} = event.target;
 
         setInputText(value);
-
+        
         manageResultsArray(value);
 
     }
 
     return (
         <div className={styles.container}>
-            <form>
+            <form onSubmit={event => event.preventDefault()}>
                 <h2>Nome do personagem</h2>
                 <div className={styles.search}>
                     <input 
