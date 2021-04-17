@@ -14,7 +14,6 @@
     margin-bottom: 10px;
 }
 
-
 .series .serieDetails{
     display: grid;
     align-items: center;
@@ -27,8 +26,7 @@
 }
 
 .serieDetails img {
-    width: 90px;
-    margin: 0 auto;
+    width: 85px;
 }
 
 .serieDetails p{
@@ -40,12 +38,7 @@
         padding: 0 107px;
     }
 
-    .serieDetails img {
-        margin: 0 0;
-    }
-
     .series .serieDetails{
-        
         grid-template-columns: 1fr 2fr;
         padding: 10px;
     }
@@ -61,6 +54,7 @@
     }
 
     .series .serieDetails{
+        
         grid-template-columns: 1fr 1fr;
         padding: 10px;
     }    
@@ -72,7 +66,7 @@
     }
 
     .serieDetails p{
-        font-size: 15px;
+        font-size: 16px;
     }
 
 }

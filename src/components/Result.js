@@ -17,7 +17,7 @@ const Result = ({currentPage , currentCharacters, openModal}) => {
                 currentCharacters.map(character => (
                     <div key={character.id} className={styles.tableItem} onClick={() => openModal(character.id)}>
                         <div className={styles.thumbnailName}>
-                            <img src={`${character.thumbnail.path}.${character.thumbnail.extension}`} />
+                            <img src={`${character.thumbnail.path}.${character.thumbnail.extension}`} alt=""/>
                             <h3>{character.name}</h3>
                         </div>
                         <div className={styles.responsive}>

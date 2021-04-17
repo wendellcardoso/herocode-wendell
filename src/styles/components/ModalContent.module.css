@@ -5,6 +5,7 @@
 
 .closeModal img {
     width: 12px;
+    cursor: pointer;
 }
 
 .charDetails{
@@ -18,7 +19,7 @@
 }
 
 .charDetails img{
-    width: 80px;
+    width: 150px;
 }
 
 .charDetails h2{

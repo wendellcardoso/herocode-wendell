@@ -12,9 +12,8 @@ const Form = ({manageResultsArray}) => {
         setInputText(value);
         
         manageResultsArray(value);
-
     }
-
+    
     return (
         <div className={styles.container}>
             <form onSubmit={event => event.preventDefault()}>
@@ -27,7 +26,7 @@ const Form = ({manageResultsArray}) => {
                         onChange={handleInputChange}
                     />
                     <span type="submit">
-                        <img src="assets/search.svg" />
+                        <img src="assets/search.svg" alt="Search" />
                     </span>
                 </div>
 

@@ -52,6 +52,10 @@ h1{
     text-align: center;
 }
 
+img{
+    border-radius: 4px;
+}
+
 .content{
     background-color: var(--background);
 

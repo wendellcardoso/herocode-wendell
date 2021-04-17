@@ -17,13 +17,12 @@ function App() {
   const [currentCharacters, setCurrentCharacters] = useState([]);
 
   /*PAGINACAO*/
-  const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [charactersPerPage] = useState(10);
 
   /*MODAL*/
-  const [modalIsOpen, setIsOpen] = useState(true);
-  const [idSelectedChar, setIdSelectedChar] = useState(null);
+  const [modalIsOpen, setIsOpen] = useState(false);
+  const [charSelected, setCharSelected] = useState([]);
   const [series, setSeries] = useState([]);
   const [events, setEvents] = useState([]);
 
@@ -32,38 +31,26 @@ function App() {
     const publicKey = "683181e8d97212fef95e84879055cd63";
     const hash = "371b267365d4480f7313c97c50a27a67";
     const urlBase = "https://gateway.marvel.com/v1/public/characters";
-    const limit = 50;
+    const limit = 100;
     const uri = `${urlBase}?ts=1&limit=${limit}&apikey=${publicKey}&hash=${hash}`;
 
     const fetchCharacters = async () => {
-      // setLoading(true);
-      // const res = await axios.get(uri);
-      // setCharacters(res.data.data.results);
-      // setLoading(false);
-
-      // if(localStorage.getItem("dataTeste") == null){
-      //   localStorage.setItem("dataTeste", JSON.stringify(res.data.data.results));
-      // }
+      const res = await axios.get(uri);
+      setCharacters(res.data.data.results);
+      setSearchedCharacters(res.data.data.results);
     };
     
-    // fetchCharacters();
+    fetchCharacters();
 
-    if(characters.length == 0){
-      setCharacters(JSON.parse(localStorage.getItem("dataTeste")));
-      setSearchedCharacters(JSON.parse(localStorage.getItem("dataTeste")));
-    };
   }, []);
 
   
   useEffect(() => {
-    // console.log(searchedCharacters);
     const indexOfLastCharacter = currentPage * charactersPerPage;
     const indexOfFirstCharacter = indexOfLastCharacter - charactersPerPage;
     const x = searchedCharacters.slice(indexOfFirstCharacter, indexOfLastCharacter);
     setCurrentCharacters(x);
   }, [searchedCharacters, currentPage]);
-  
-  // console.log(characters);
   
   const paginate = pageNumber => setCurrentPage(pageNumber);
   
@@ -72,7 +59,7 @@ function App() {
 
     setCurrentPage(1);
 
-    if(inputText == ""){
+    if(inputText === ""){
       setSearchedCharacters(characters);
     }else{
       setSearchedCharacters(characters.filter(character => 
@@ -83,20 +70,37 @@ function App() {
     }
   }
 
-
   const openModal = (charId) => {
-    console.log(charId);
-
-    setIdSelectedChar(charId);
-    setIsOpen(true);
+    setCharSelected(currentCharacters.filter(char => char.id === charId));
     
+    setIsOpen(true);
+
+    const uriSeries = `https://gateway.marvel.com/v1/public/characters/${charId}/series?ts=1&limit=3&apikey=683181e8d97212fef95e84879055cd63&hash=371b267365d4480f7313c97c50a27a67`;
+    
+    const fetchSeries = async () => {
+      
+      const seriesData = await axios.get(uriSeries);
+      setSeries(seriesData.data.data.results);      
+    }
+    fetchSeries();
+    
+    const uriEvents = `https://gateway.marvel.com/v1/public/characters/${charId}/events?ts=1&limit=3&apikey=683181e8d97212fef95e84879055cd63&hash=371b267365d4480f7313c97c50a27a67`;
+    
+    const fetchEvents = async () => {
+
+      const seriesData = await axios.get(uriEvents);
+      setEvents(seriesData.data.data.results);
+  
+    }
+    fetchEvents();
   }
   
   const closeModal = () => {
-    setIdSelectedChar(null);
+    setSeries([]);
+    setEvents([]);
+    
     setIsOpen(false);
   }
-
 
   return (
     <div>
@@ -118,7 +122,11 @@ function App() {
         currentPage={currentPage}
       />
       <Modal isOpen={modalIsOpen}>
-        <ModalContent closeModal={closeModal} />
+        <ModalContent
+          charSelected={charSelected}
+          series={series}
+          events={events}
+          closeModal={closeModal} />
       </Modal>
     </div>
   );
