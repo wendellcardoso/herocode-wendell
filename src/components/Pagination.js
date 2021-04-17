@@ -63,12 +63,12 @@ const Pagination = ({ charactersPerPage, totalCharacter, paginate, currentPage }
         <>
         {
           currentPage !== 2 && (
-            <a href="!#" className={styles.pageControl} onClick={() => paginate(1)}>
+            <a href="#" className={styles.pageControl} onClick={() => paginate(1)}>
               <img src="assets/first.svg" alt=""/>
             </a>
           )
         }
-          <a href="!#" className={styles.pageControl} onClick={() => paginate(currentPage-1)}>
+          <a href="#" className={styles.pageControl} onClick={() => paginate(currentPage-1)}>
             <img src="assets/prev.svg" alt=""/>
           </a>
         </>
@@ -79,7 +79,7 @@ const Pagination = ({ charactersPerPage, totalCharacter, paginate, currentPage }
           pageNumbers.slice(sliceRange[0], sliceRange[1]).map(number => (
             <li key={number}>
               <a
-                  href="!#" 
+                  href="#" 
                   onClick={() => paginate(number)}
                   className={number === currentPage ? styles.currentPage : undefined}
               >
@@ -92,12 +92,12 @@ const Pagination = ({ charactersPerPage, totalCharacter, paginate, currentPage }
     {
       currentPage !== pageNumbers.length && (
         <>
-          <a href="!#" className={styles.pageControl} onClick={() => paginate(currentPage + 1)}>
+          <a href="#" className={styles.pageControl} onClick={() => paginate(currentPage + 1)}>
             <img src="assets/next.svg" alt=""/>
           </a>
           {
             (currentPage+1) !== pageNumbers.length && (
-              <a href="!#" className={styles.pageControl} onClick={() => paginate(pageNumbers.length)}>
+              <a href="#" className={styles.pageControl} onClick={() => paginate(pageNumbers.length)}>
                 <img src="assets/last.svg" alt=""/>
               </a>
             )
