@@ -2,7 +2,7 @@ import React from "react";
 
 import styles from "../styles/components/Result.module.css";
 
-const Result = ({currentPage , currentCharacters}) => {
+const Result = ({currentPage , currentCharacters, openModal}) => {
     return (
         <div id={currentPage} className={styles.container} >
             <div className={styles.tableHead}>
@@ -15,7 +15,7 @@ const Result = ({currentPage , currentCharacters}) => {
 
             {
                 currentCharacters.map(character => (
-                    <div key={character.id} className={styles.tableItem}>
+                    <div key={character.id} className={styles.tableItem} onClick={() => openModal(character.id)}>
                         <div className={styles.thumbnailName}>
                             <img src={`${character.thumbnail.path}.${character.thumbnail.extension}`} />
                             <h3>{character.name}</h3>

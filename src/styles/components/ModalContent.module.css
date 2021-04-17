@@ -1,0 +1,32 @@
+.closeModal{
+    text-align: right;
+    
+}
+
+.closeModal img {
+    width: 12px;
+}
+
+.charDetails{
+    margin-top: 25px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px
+}
+
+.charDetails img{
+    width: 80px;
+}
+
+.charDetails h2{
+    font-size: 14px;
+}
+
+.charDetails p{
+    font-size: 12px;
+    font-style: italic;
+    text-align: justify;
+}

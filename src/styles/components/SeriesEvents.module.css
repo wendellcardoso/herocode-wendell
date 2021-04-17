@@ -1,0 +1,31 @@
+.series{
+    margin-top: 25px;
+}
+
+.series > div{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.series h2{
+    font-size: 14px;
+    color: var(--placeholder);
+    margin-bottom: 10px;
+}
+
+
+.series .serieDetails{
+    display: grid;
+    align-items: center;
+    grid-template-columns: 1fr 1fr;
+}
+
+.serieDetails img {
+    width: 90px;
+    margin: 0 auto;
+}
+
+.serieDetails p{
+    font-size: 12px;
+}

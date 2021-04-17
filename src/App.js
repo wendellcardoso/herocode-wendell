@@ -5,9 +5,12 @@ import Header from "./components/Header";
 import Form from "./components/Form";
 import Result from "./components/Result";
 import Pagination from "./components/Pagination";
+import Modal from "react-modal";
+import ModalContent from "./components/ModalContent";
 
 import "./styles/global.css";
 
+Modal.setAppElement("#root");
 function App() {
   const [characters, setCharacters] = useState([]);
   const [searchedCharacters, setSearchedCharacters] = useState([]);
@@ -17,6 +20,12 @@ function App() {
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [charactersPerPage] = useState(10);
+
+  /*MODAL*/
+  const [modalIsOpen, setIsOpen] = useState(true);
+  const [idSelectedChar, setIdSelectedChar] = useState(null);
+  const [series, setSeries] = useState([]);
+  const [events, setEvents] = useState([]);
 
   useEffect(() => {
 
@@ -46,21 +55,19 @@ function App() {
   }, []);
 
   
-
-  const paginate = pageNumber => setCurrentPage(pageNumber);
-
   useEffect(() => {
-      console.log(searchedCharacters);
-      const indexOfLastCharacter = currentPage * charactersPerPage;
-      const indexOfFirstCharacter = indexOfLastCharacter - charactersPerPage;
-      const x = searchedCharacters.slice(indexOfFirstCharacter, indexOfLastCharacter);
-      setCurrentCharacters(x);
+    // console.log(searchedCharacters);
+    const indexOfLastCharacter = currentPage * charactersPerPage;
+    const indexOfFirstCharacter = indexOfLastCharacter - charactersPerPage;
+    const x = searchedCharacters.slice(indexOfFirstCharacter, indexOfLastCharacter);
+    setCurrentCharacters(x);
   }, [searchedCharacters, currentPage]);
   
   // console.log(characters);
-
+  
+  const paginate = pageNumber => setCurrentPage(pageNumber);
+  
   //Alimentar o array de rederizacao
-
   const manageResultsArray = (inputText) => {
 
     setCurrentPage(1);
@@ -75,13 +82,34 @@ function App() {
       ) 
     }
   }
+
+
+  const openModal = (charId) => {
+    console.log(charId);
+
+    setIdSelectedChar(charId);
+    setIsOpen(true);
+    
+  }
+  
+  const closeModal = () => {
+    setIdSelectedChar(null);
+    setIsOpen(false);
+  }
+
+
   return (
     <div>
       <Header/>
       <section className="content">
         <h1>Busca de personagens</h1>
         <Form manageResultsArray={manageResultsArray} />
-        <Result currentPage={currentPage} currentCharacters={currentCharacters} />
+        <Result 
+          currentPage={currentPage} 
+          currentCharacters={currentCharacters}
+          openModal={openModal}
+
+        />
       </section>
       <Pagination
         charactersPerPage={charactersPerPage}
@@ -89,6 +117,9 @@ function App() {
         paginate={paginate}
         currentPage={currentPage}
       />
+      <Modal isOpen={modalIsOpen}>
+        <ModalContent closeModal={closeModal} />
+      </Modal>
     </div>
   );
 }
