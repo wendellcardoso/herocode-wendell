@@ -1,5 +1,16 @@
 nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    gap: 13px;
+
     padding: 32px;
+
+}
+
+nav img{
+    width: 10px;
 }
 
 ul {
@@ -9,7 +20,7 @@ ul {
     gap: 16px;
 }
 
-a{
+li a{
     background-color: var(--background2);
     /* background-color: tomato; */
     
@@ -22,12 +33,12 @@ a{
     transition: 0.2s;
 }
 
-a:hover{
+li a:hover{
     background-color: var(--blue);
     color: var(--white);
 }
 
-a:active{
+li a:active{
     background-color: var(--blue-dark);
     color: var(--white);
 }

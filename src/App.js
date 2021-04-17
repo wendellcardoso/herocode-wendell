@@ -50,7 +50,7 @@ function App() {
   const paginate = pageNumber => setCurrentPage(pageNumber);
 
   useEffect(() => {
-      // console.log(searchedCharacters);
+      console.log(searchedCharacters);
       const indexOfLastCharacter = currentPage * charactersPerPage;
       const indexOfFirstCharacter = indexOfLastCharacter - charactersPerPage;
       const x = searchedCharacters.slice(indexOfFirstCharacter, indexOfLastCharacter);

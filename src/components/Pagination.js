@@ -24,16 +24,14 @@ const Pagination = ({ charactersPerPage, totalCharacter, paginate, currentPage }
     // console.log(windowWidth);
   }, [windowWidth])
 
-
   window.addEventListener('resize', () => setWindowWidth(window.innerWidth));
-
 
   if(limit === 3){
     if(currentPage < limit){
       sliceRange[0] = 0;
       sliceRange[1] = limit
     }else if (currentPage === pageNumbers.length){
-      sliceRange[0] = currentPage - 3;
+      sliceRange[0] = currentPage - limit;
       sliceRange[1] = currentPage + 1;
     }else{
       sliceRange[0] = currentPage - 2;
@@ -56,12 +54,29 @@ const Pagination = ({ charactersPerPage, totalCharacter, paginate, currentPage }
 
   return (
     <nav>
+
+    {
+      currentPage > 1 && (
+        <>
+        {
+          currentPage !== 2 && (
+            <a href="#" className={styles.pageControl} onClick={() => paginate(1)}>
+              <img src="assets/first.svg" />
+            </a>
+          )
+        }
+          <a href="#" className={styles.pageControl} onClick={() => paginate(currentPage-1)}>
+            <img src="assets/prev.svg" />
+          </a>
+        </>
+      )
+    }
       <ul className='pagination'>
         {
           pageNumbers.slice(sliceRange[0], sliceRange[1]).map(number => (
             <li key={number}>
               <a
-                  href={`#${currentPage}`} 
+                  href="#" 
                   onClick={() => paginate(number)}
                   className={number == currentPage ? styles.currentPage : undefined}
               >
@@ -71,6 +86,22 @@ const Pagination = ({ charactersPerPage, totalCharacter, paginate, currentPage }
           ))
         }
       </ul>
+    {
+      currentPage !== pageNumbers.length && (
+        <>
+          <a href="#" className={styles.pageControl} onClick={() => paginate(currentPage + 1)}>
+            <img src="assets/next.svg" />
+          </a>
+          {
+            (currentPage+1) !== pageNumbers.length && (
+              <a href="#" className={styles.pageControl} onClick={() => paginate(pageNumbers.length)}>
+                <img src="assets/last.svg" />
+              </a>
+            )
+          }
+        </>
+      )
+    }
     </nav>
   );
 
