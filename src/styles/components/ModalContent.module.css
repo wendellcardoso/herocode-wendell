@@ -22,11 +22,34 @@
 }
 
 .charDetails h2{
-    font-size: 14px;
+    font-size: 16px;
+    margin-bottom: 5px;
 }
 
 .charDetails p{
     font-size: 12px;
     font-style: italic;
     text-align: justify;
+}
+
+@media (min-width: 768px) {
+
+    .charDetails p{
+        max-width: 430px;
+    } 
+}
+
+@media (min-width: 1024px) {
+
+    .charDetails{
+        flex-direction: row;
+        justify-content: left;
+        gap: 30px;
+        padding: 0 107px;
+    }
+
+    .charDetails p{
+        font-size: 15px;
+    }
+
 }
